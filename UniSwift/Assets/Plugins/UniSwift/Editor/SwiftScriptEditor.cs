@@ -52,8 +52,9 @@ public class SwiftScriptEditor : Editor {
 	}
 
 	private void CreateFileWatcher() {
-		watcher = new FileSystemWatcher (tempSwiftFile);
+		watcher = new FileSystemWatcher (Path.GetDirectoryName(tempSwiftFile), "*.swift");
 		watcher.Changed += (object sender, FileSystemEventArgs e) => {
+			UnityEngine.Debug.Log ("Changed");
 			targetScript.SwiftCode = File.ReadAllText(tempSwiftFile);
 		};
 	}
